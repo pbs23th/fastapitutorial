@@ -24,3 +24,7 @@ pydantic[email]
 
 #hashing              #new
 passlib[bcrypt]
+
+#for testing       #new
+pytest
+requests

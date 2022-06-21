@@ -1,4 +1,4 @@
 #db > base.py
-from backend.db.base_class import Base
-from backend.db.models.jobs import Job
-from backend.db.models.users import User
+from .base_class import Base
+from db.models.jobs import Job
+from db.models.users import User
