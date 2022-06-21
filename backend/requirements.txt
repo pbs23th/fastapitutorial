@@ -20,3 +20,7 @@ cryptography
 
 #for email validation            #new
 pydantic[email]
+
+
+#hashing              #new
+passlib[bcrypt]
