@@ -28,3 +28,17 @@ passlib[bcrypt]
 #for testing       #new
 pytest
 requests
+
+#for jwt
+python-jose
+
+#for  cleaning up codebase on each commit
+pre-commit
+
+#for accessing form data       #new
+python-multipart
+
+
+databases
+asyncpg  #For postgres async support
+aiomysql

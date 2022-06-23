@@ -6,9 +6,9 @@ from fastapi.staticfiles import StaticFiles
 from core.config import settings
 from apis.base import api_router
 from db.session import engine  # new
-from db.base_class import Base  # new
 from db.base import Base
-
+from webapps.base import api_router as web_app_router
+from db.utils import check_db_connected,check_db_disconnected
 
 def include_router(app):
     app.include_router(api_router)
@@ -26,12 +26,22 @@ def create_tables():  # new
 def start_application():
     app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
     include_router(app)
+    app.include_router(web_app_router)
     configure_static(app)
     create_tables()  # new
     return app
 
 
 app = start_application()
+
+@app.on_event("startup")              #new
+async def app_startup():
+    await check_db_connected()
+
+
+@app.on_event("shutdown")     #new
+async def app_shutdown():
+    await check_db_disconnected()
 
 
 if __name__ == "__main__":
