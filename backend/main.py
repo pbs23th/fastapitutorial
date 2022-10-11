@@ -10,6 +10,8 @@ from db.base import Base
 from webapps.base import api_router as web_app_router
 from db.utils import check_db_connected,check_db_disconnected
 
+
+
 def include_router(app):
     app.include_router(api_router)
 
@@ -26,7 +28,6 @@ def create_tables():  # new
 def start_application():
     app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
     include_router(app)
-    app.include_router(web_app_router)
     configure_static(app)
     create_tables()  # new
     return app
@@ -44,5 +45,6 @@ async def app_shutdown():
     await check_db_disconnected()
 
 
+
 if __name__ == "__main__":
-	uvicorn.run('main:app', reload=True)
+	uvicorn.run('main:app', host='0.0.0.0', port=8000, reload=True)

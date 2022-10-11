@@ -4,8 +4,9 @@ from schemas.jobs import JobCreate
 from db.models.jobs import Job
 
 
-def create_new_job(job: JobCreate,db: Session,owner_id:int):
-    job_object = Job(**job.dict(),owner_id=owner_id)
+def create_new_job(job: JobCreate,db: Session, username:str, owner_id:int):
+    print(username)
+    job_object = Job(**job.dict(),username=username, owner_id=owner_id)
     db.add(job_object)
     db.commit()
     db.refresh(job_object)
@@ -18,7 +19,7 @@ def retreive_job(id:int,db:Session):
 
 
 def list_jobs(db : Session):    #new
-    jobs = db.query(Job).filter(Job.is_active == True).all()
+    jobs = db.query(Job).all()
     return jobs
 
 

@@ -6,7 +6,8 @@ from fastapi import HTTPException
 from fastapi import status
 from typing import Optional
 from typing import Dict
-
+from fastapi import responses
+from starlette.responses import RedirectResponse
 
 class OAuth2PasswordBearerWithCookie(OAuth2):
     def __init__(
@@ -28,7 +29,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         scheme, param = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":
             if self.auto_error:
-                return '/'
+                return RedirectResponse(url="/login")
                 # raise HTTPException(
                 #     status_code=status.HTTP_401_UNAUTHORIZED,
                 #     detail="Not authenticated",

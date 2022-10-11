@@ -60,7 +60,6 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme),db: Session=
         username: str = payload.get("sub")
         print("username/email extracted is ",username)
         if username is None:
-            print(credentials_exception)
             raise credentials_exception
     except JWTError:
         raise credentials_exception
